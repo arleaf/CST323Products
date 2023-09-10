@@ -24,8 +24,8 @@ public class Registration_Controller {
 	@Autowired
 	private RegistrationService regService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
 
     @Autowired
     AuthoritiesRepository authoritiesRepository;
@@ -66,7 +66,7 @@ public class Registration_Controller {
         }
         
         regService.register(new UserEntity(user.getUsername(),
-                                            passwordEncoder.encode(user.getPassword()), 
+                                            user.getPassword(), 
                                             true,
                                             user.getFirstName(), 
                                             user.getLastName(),
