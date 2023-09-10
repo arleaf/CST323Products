@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Document</title>
+    <style>        
+        .button-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(products)}">
+                        <td colspan="3" style="text-align: center;">No Orders Available</td>
+                    </tr>
+                    <tr th:each="product : ${products}">
+                        <td><h5 th:text="${product.id}">null</h5></td>
+                        <td><h5 th:text="${product.name}">null</h5></td>
+                        <td><h5 th:text="${product.price}">null</h5></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="button-container">
+                <button onclick="location.href='../products/newItem'" type="button" class="btn btn-outline-primary">Add New Product</button>
+                <button onclick="location.href='../products/update'" type="button" class="btn btn-outline-primary">Update Existing</button>
+                <!-- <button onclick="location.href='../products/delete'" type="button" class="btn btn-outline-danger add-new-item-button">Delete Product</button> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

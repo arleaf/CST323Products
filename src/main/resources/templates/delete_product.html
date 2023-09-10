@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Home</title>
+</head>
+<body>
+     <div layout:fragment="content">
+            <form action="#" th:action="@{deleteProduct}"method="post" style="max-width: 330px; padding: 15px;" class="m-auto">
+                  <div class="form-floating">
+                        <input type="number" id="inputId" name="id" class="form-control" placeholder="Id" style="margin:0.5rem 0rem" required>
+                        <label for="inputId">Id</label>
+                  </div>
+                  <button class="w-100 btn btn-lg btn-danger" type="submit">Delete Product</button>
+                  <div th:each="err : ${#fields.errors('*')}">
+                        <span style="color: red;" th:text="${err}" class="fieldError"></span>
+            </form>
+      </div>
+</body>
+</html>
