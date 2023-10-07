@@ -17,10 +17,14 @@ import com.gcu.model.RegisterModel;
 
 import jakarta.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Controller
 @RequestMapping("/registration")
 public class Registration_Controller {
 	
+	private static final Logger logger = LoggerFactory.getLogger(Registration_Controller.class);
+
 	@Autowired
 	private RegistrationService regService;
 
@@ -55,12 +59,14 @@ public class Registration_Controller {
      */
     @PostMapping("/doRegistration")
     public String doRegistration(@Valid RegisterModel user, BindingResult bindingResult, Model model) {
+    	logger.info("Entering Registration_Controller.doRegistration()");
     	System.out.printf("First Name: %s Last Name: %s Phone Num: %s Address: %s Username: %s Email: %s Password: %s%n", user.getFirstName(), user.getLastName(), user.getPhone(), user.getAddress(), user.getUsername(), user.getEmail(), user.getPassword());
     	//Validation errors for Registration
     	
     	
     	
         if(bindingResult.hasErrors() || !user.getPassword().equals(user.getConfirmPassword())) {
+        	logger.info("Error with Registration Form. Trying again.");
             model.addAttribute("title", "Registration Form");
             return "registration";
         }
@@ -74,6 +80,8 @@ public class Registration_Controller {
                                             user.getAddress(), 
                                             user.getPhone()));
         authoritiesRepository.save(new AuthorityEntity(user.getUsername(),"ROLE_USER"));
+        logger.info("User successfully registered.");
+        logger.info("Exiting Registration_Controller.doRegistration()");
         return "redirect:/login";
     }
 }

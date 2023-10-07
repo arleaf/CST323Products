@@ -1,10 +1,13 @@
 package com.gcu.business;
 
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gcu.controller.Registration_Controller;
 import com.gcu.data.ProductsDataSevice;
 import com.gcu.data.entity.ProductEntity;
 import com.gcu.model.ProductModel;
@@ -14,7 +17,8 @@ public class ProductsBusinessService {
     @Autowired
     private ProductsDataSevice service;
 
-    
+    private static final Logger logger = LoggerFactory.getLogger(ProductsBusinessService.class);
+
     /**
      * Used to test the ProudctsBusinessService class
      */
@@ -29,6 +33,7 @@ public class ProductsBusinessService {
      * @return List<ProductModel> returns a listed product model object
      */
     public List<ProductModel> getProducts() {
+    	logger.info("Entering ProductBusinessService.getProducts()");
         // service.create(new ProductEntity("example", 70.1f));
         List<ProductEntity> productsEntity = service.findAll();
         List<ProductModel> productsDomain = new ArrayList<ProductModel>();
@@ -37,6 +42,8 @@ public class ProductsBusinessService {
                                                 entity.getName(),
                                                 entity.getPrice()));
         }
+        logger.info("ProductBusinessService.getProducts() successful");
+        logger.info("Exiting ProductBusinessService.getProducts()");
         return productsDomain;
     }
 
@@ -58,6 +65,7 @@ public class ProductsBusinessService {
      * @param ProductEntity the product to be added
      */
     public boolean addProduct(ProductEntity product) {
+    	logger.info("Entering ProductBusinessService.addProduct()");
         return service.create(product);
     }
 

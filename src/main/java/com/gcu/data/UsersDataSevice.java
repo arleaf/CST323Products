@@ -6,14 +6,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gcu.business.ProductsBusinessService;
 import com.gcu.data.entity.UserEntity;
 import com.gcu.data.repository.UsersRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Service
 public class UsersDataSevice implements DataAccessInterface<UserEntity> {
 
     @Autowired
     private UsersRepository usersRepository;
+
+
+    private static final Logger logger = LoggerFactory.getLogger(UsersDataSevice.class);
 
     public UsersDataSevice(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
@@ -42,12 +48,18 @@ public class UsersDataSevice implements DataAccessInterface<UserEntity> {
 
     @Override
     public boolean create(UserEntity user) {
+    	logger.info("Entering UsersDataService.create()");
+        
         try {
             this.usersRepository.save(user);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.info("UsersDataService.create() failed: "+ e);
+            logger.info("Exiting UsersDataService.create()");
             return false;
         }
+        logger.info("UsersDataService.create(). User successfuly created");
+        logger.info("Exiting UsersDataService.create()");
         return true;
     }
 

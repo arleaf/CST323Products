@@ -5,14 +5,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gcu.controller.Registration_Controller;
 import com.gcu.data.OrdersDataSevice;
 import com.gcu.data.entity.OrderEntity;
 import com.gcu.model.OrderModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class OrdersBusinessService {
 
     @Autowired
     private OrdersDataSevice service;
+    private static final Logger logger = LoggerFactory.getLogger(OrdersBusinessService.class);
 
     
     /**
@@ -29,6 +33,7 @@ public class OrdersBusinessService {
      * @return List<OrderModel> returns a listed order model object
      */
     public List<OrderModel> getOrders() {
+    	logger.info("Entering OrdersBusinessService.getOrders()");
         // service.create(new OrderEntity("example", "example", 70.0f, 10));
         List<OrderEntity> ordersEntity = service.findAll();
         List<OrderModel> ordersDomain = new ArrayList<OrderModel>();
@@ -39,6 +44,8 @@ public class OrdersBusinessService {
                                             entity.getPrice(), 
                                             entity.getQuantity()));
         }
+        logger.info("Exiting OrdersBusinessService.getOrders()");
+    	
         return ordersDomain;
     }
 
