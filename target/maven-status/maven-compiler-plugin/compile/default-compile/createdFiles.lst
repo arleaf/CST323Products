@@ -30,3 +30,4 @@ com/gcu/model/LoginModel.class
 com/gcu/business/RegistrationService.class
 com/gcu/SpringConfig.class
 com/gcu/data/entity/OrderEntity.class
+com/gcu/PlainTextPasswordEncoder.class

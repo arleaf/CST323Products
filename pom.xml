@@ -13,10 +13,8 @@
 	<version>0.0.1</version>
 	<name>Milestone</name>
 	<description>E-commerce site</description>
-	<packaging>war</packaging>
 	<properties>
 		<java.version>17</java.version>
-		<warName>assignment7</warName>
 	</properties>
 	<dependencies>
 
@@ -94,6 +92,26 @@
   			<groupId>junit</groupId>
   			<artifactId>junit</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.20.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.20.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j-impl</artifactId>
+		    <version>2.20.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.4.11</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -103,24 +121,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-                <configuration>
-                    <warSourceDirectory>WebContent</warSourceDirectory>
-                    <warName>${warname}</warName>
-                </configuration>
-            </plugin>
 		</plugins>
-        <resources>
-            <resource>
-                <directory>src</directory>
-                <includes>
-                    <include>log4j.xml</include>
-                </includes>
-                <targetPath>${project.basedir}/target/classes</targetPath>
-            </resource>
-        </resources>
 	</build>
 
 </project>
