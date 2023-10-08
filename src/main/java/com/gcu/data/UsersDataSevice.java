@@ -49,7 +49,6 @@ public class UsersDataSevice implements DataAccessInterface<UserEntity> {
     @Override
     public boolean create(UserEntity user) {
     	logger.info("Entering UsersDataService.create()");
-    	logger.info("This is a pipeline test.");
         
         try {
             this.usersRepository.save(user);
